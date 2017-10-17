@@ -1,0 +1,7 @@
+ccw stiction = -0.67
+cw stiction = 0
+
+
+Ball positions:
+left side is 0cm, volt = 3.30V
+right side is 41.7cm, volt = 7.26V
