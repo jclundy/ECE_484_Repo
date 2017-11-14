@@ -1,12 +1,12 @@
 Model {
-  Name			  "Pole_Placement_Continuous_a"
+  Name			  "Pole_Placement_Continuous"
   Version		  8.9
   SavedCharacterEncoding  "windows-1252"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.21"
+    ComputedModelVersion    "1.26"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -115,9 +115,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "joe"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Nov 14 10:56:36 2017"
-  RTWModifiedTimeStamp	  432557796
-  ModelVersionFormat	  "1.%<AutoIncrement:21>"
+  LastModifiedDate	  "Tue Nov 14 16:32:18 2017"
+  RTWModifiedTimeStamp	  432577938
+  ModelVersionFormat	  "1.%<AutoIncrement:26>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -168,12 +168,12 @@ Model {
     $PropName		    "DataLoggingOverride"
     $ObjectID		    8
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
-    model_		    "Pole_Placement_Continuous_a"
+    model_		    "Pole_Placement_Continuous"
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
-      Cell		      "Pole_Placement_Continuous_a"
+      Cell		      "Pole_Placement_Continuous"
       PropName		      "logAsSpecifiedByModels_"
     }
     Array {
@@ -1124,7 +1124,7 @@ Model {
     }
   }
   System {
-    Name		    "Pole_Placement_Continuous_a"
+    Name		    "Pole_Placement_Continuous"
     Location		    [-7, -7, 1543, 831]
     Open		    off
     PortBlocksUseCompactNotation off
@@ -1140,7 +1140,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "30"
+    SIDHighWatermark	    "31"
     Block {
       BlockType		      Saturate
       Name		      "Angle Saturator"
@@ -1164,7 +1164,7 @@ Model {
       BlockType		      Gain
       Name		      "Gain1"
       SID		      "13"
-      Position		      [340, 215, 395, 245]
+      Position		      [330, 215, 385, 245]
       ZOrder		      37
       Gain		      "Kp_c2"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
@@ -1347,7 +1347,7 @@ Model {
       Name		      "Position Saturator1"
       SID		      "28"
       Ports		      [1, 1]
-      Position		      [965, 215, 995, 245]
+      Position		      [975, 215, 1005, 245]
       ZOrder		      49
       InputPortMap	      "u0"
       UpperLimit	      "0.417"
@@ -1387,7 +1387,7 @@ Model {
       Position		      [45, 195, 105, 265]
       ZOrder		      48
       WaveForm		      "square"
-      Amplitude		      "0.1"
+      Amplitude		      "0.03"
       Frequency		      "0.05"
     }
     Block {
@@ -1451,7 +1451,7 @@ Model {
       Name		      "To Workspace2"
       SID		      "10"
       Ports		      [1]
-      Position		      [550, 125, 610, 155]
+      Position		      [670, 35, 730, 65]
       ZOrder		      31
       VariableName	      "input_sig_cont"
       MaxDataPoints	      "inf"
@@ -1475,6 +1475,20 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace4"
+      SID		      "31"
+      Ports		      [1]
+      Position		      [350, 70, 410, 100]
+      ZOrder		      53
+      VariableName	      "ref_sig2_cont"
+      MaxDataPoints	      "inf"
+      SaveFormat	      "Timeseries"
+      Save2DSignal	      "3-D array (concatenate along third dimension)"
+      FixptAsFi		      on
+      SampleTime	      "-1"
+    }
+    Block {
       BlockType		      TransferFcn
       Name		      "Transfer Fcn1"
       SID		      "25"
@@ -1487,7 +1501,7 @@ Model {
       BlockType		      TransferFcn
       Name		      "Transfer Fcn2"
       SID		      "12"
-      Position		      [440, 207, 510, 253]
+      Position		      [410, 169, 530, 291]
       ZOrder		      36
       Numerator		      "[g1 g0]"
       Denominator	      "[f1 f0]"
@@ -1496,16 +1510,16 @@ Model {
       ZOrder		      15
       SrcBlock		      "Transfer Fcn2"
       SrcPort		      1
-      Points		      [22, 0]
+      Points		      [17, 0]
       Branch {
-	ZOrder			48
-	DstBlock		"Angle Saturator"
+	ZOrder			83
+	Points			[0, -180]
+	DstBlock		"To Workspace2"
 	DstPort			1
       }
       Branch {
-	ZOrder			4
-	Points			[0, -90]
-	DstBlock		"To Workspace2"
+	ZOrder			48
+	DstBlock		"Angle Saturator"
 	DstPort			1
       }
     }
@@ -1544,8 +1558,18 @@ Model {
       ZOrder		      34
       SrcBlock		      "Position Saturator"
       SrcPort		      1
-      DstBlock		      "Sum"
-      DstPort		      1
+      Points		      [27, 0]
+      Branch {
+	ZOrder			85
+	Points			[0, -145]
+	DstBlock		"To Workspace4"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			84
+	DstBlock		"Sum"
+	DstPort			1
+      }
     }
     Line {
       ZOrder		      36
@@ -1582,7 +1606,7 @@ Model {
       ZOrder		      65
       SrcBlock		      "Position Saturator1"
       SrcPort		      1
-      Points		      [42, 0]
+      Points		      [32, 0]
       Branch {
 	ZOrder			68
 	Points			[0, -75]

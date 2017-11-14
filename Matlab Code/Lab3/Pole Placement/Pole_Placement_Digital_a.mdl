@@ -1,12 +1,12 @@
 Model {
-  Name			  "Pole_Placement_Digital_a"
+  Name			  "Pole_Placement_Digital"
   Version		  8.9
   SavedCharacterEncoding  "windows-1252"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.24"
+    ComputedModelVersion    "1.26"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -103,9 +103,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "joe"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Nov 14 10:56:01 2017"
-  RTWModifiedTimeStamp	  432557760
-  ModelVersionFormat	  "1.%<AutoIncrement:24>"
+  LastModifiedDate	  "Tue Nov 14 16:31:13 2017"
+  RTWModifiedTimeStamp	  432577873
+  ModelVersionFormat	  "1.%<AutoIncrement:26>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -156,12 +156,12 @@ Model {
     $PropName		    "DataLoggingOverride"
     $ObjectID		    7
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
-    model_		    "Pole_Placement_Digital_a"
+    model_		    "Pole_Placement_Digital"
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
-      Cell		      "Pole_Placement_Digital_a"
+      Cell		      "Pole_Placement_Digital"
       PropName		      "logAsSpecifiedByModels_"
     }
     Array {
@@ -1147,7 +1147,7 @@ Model {
     }
   }
   System {
-    Name		    "Pole_Placement_Digital_a"
+    Name		    "Pole_Placement_Digital"
     Location		    [-7, -7, 1543, 831]
     Open		    off
     PortBlocksUseCompactNotation off
@@ -1422,7 +1422,7 @@ Model {
       Position		      [40, 195, 100, 265]
       ZOrder		      47
       WaveForm		      "square"
-      Amplitude		      "0.1"
+      Amplitude		      "0.03"
       Frequency		      "0.05"
     }
     Block {

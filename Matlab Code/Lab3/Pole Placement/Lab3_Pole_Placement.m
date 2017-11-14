@@ -31,9 +31,13 @@ omega = 4 / (zeta*Ts);
 theta = cos(zeta);
 % Determine pole placement regions
 real_value = zeta*omega
-imaginary_value = omega * sqrt(1-zeta^2)
+imaginary_value = real_value * tan(theta)
+% beta = imaginary_value * 0.4;
+beta = imaginary_value * 0.5;
+alpha = real_value + 0.01;
+k = alpha * 25;
 % Characteristic polynomial with desired poles
-char_poly = (s+ real_value + 1i*imaginary_value)*(s+ real_value - 1i*imaginary_value)*(s+real_value * 10)
+char_poly = (s+ alpha + 1i*beta)*(s+ alpha - 1i*beta)*(s+k)
 % char_poly = (s+6+1i)*(s+6-1i)*(s+50);
 % Extracting coefficients of the desired polynomial
 c3 = char_poly.Numerator{1}(1);
@@ -49,15 +53,16 @@ A = [a2 0  b2 0 ;
      a0 a1 b0 b1; 
      0  a0 0  b0]
 F = inv(A)*C
-% Extracting controller zeroes
+% % Extracting controller denominator
 f1 = F(1); f0 = F(2);
-% Extracting controller poles
+% Extracting controller numerator
 g1 = F(3); g0 = F(4);
 % Define Pole Placement Controller 
 C_2 = (g1*s + g0)/(f1*s + f0)
 % Determine controller gain
 DC_gain = evalfr(C_2,0);
-Kp_c2 = 1/DC_gain;
+Kp_c2 = 1 / DC_gain;
+% 1/(4*DC_gain);
 %% Digital Controller
 C_D2 = c2d(C_2, T, 'tustin');
 a = C_D2.Numerator{1}(1); b =C_D2.Numerator{1}(2); 
@@ -69,8 +74,8 @@ CD_DEN = [c, d]
 %% Digital Controller Difference Equation
 % u[k] = -d/c u[k-1] + a/c r[k] + b/c r[k-1]
 % u[k] = f1 u[k-1] + f2 r[k] + f3 r[k-1]
-f1 = -d/c; f2 = a/c; f3 = b/c;
-[f1; f2; f3]
+diff1 = -d/c; diff2 = a/c; diff3 = b/c;
+[diff1; diff2; diff3]
 %% Outer Loop Closed Loop Response
 P_aug = G * G_2;
 G_outer = C_2 * P_aug / (1 + C_2 + P_aug);
@@ -79,21 +84,21 @@ G_outer = C_2 * P_aug / (1 + C_2 + P_aug);
 sim('Pole_Placement_Continuous_a'); % continuous model
 sim('Pole_Placement_Digital_a');
 figure();
-% plot(ball_out); hold on;
 plot(ball_out); hold on;
-plot(filtered_contol); hold on;
+plot(filtered_contol); %saturated motor voltage
 plot(ref_sig2);
+hold off;
 
 title("System Response - Discrete Controller");
 xlabel("Time (sec)");
 ylabel("Ball Position (m)");
-legend("Ball Position", "Input (for inner loop)", "Reference");
+legend("Ball Position", "Saturated Angle Input (for inner loop)", "Reference");
 
-figure();
-plot(ball_out_cont); hold on;
-plot(filtered_contol_cont); hold on;
-plot(ref_sig2);
-title("System Response - Continuous Controller");
-xlabel("Time (sec)");
-ylabel("Ball Position  (m)");
-legend("Ball Position", "Input (for inner loop)", "Reference");
+% figure();
+% plot(ball_out_cont); hold on;
+% plot(filtered_contol_cont); hold on;
+% plot(ref_sig2_cont);
+% title("System Response - Continuous Controller");
+% xlabel("Time (sec)");
+% ylabel("Ball Position  (m)");
+% legend("Ball Position", "Input (for inner loop)", "Reference");
