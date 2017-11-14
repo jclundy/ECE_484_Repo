@@ -33,8 +33,8 @@ theta = cos(zeta);
 real_value = zeta*omega
 imaginary_value = omega * sqrt(1-zeta^2)
 % Characteristic polynomial with desired poles
-% char_poly = (s+ real_value + 1i*imaginary_value)*(s+ real_value - 1i*imaginary_value)*(s+25)
-char_poly = (s+6+1i)*(s+6-1i)*(s+50);
+char_poly = (s+ real_value + 1i*imaginary_value)*(s+ real_value - 1i*imaginary_value)*(s+real_value * 10)
+% char_poly = (s+6+1i)*(s+6-1i)*(s+50);
 % Extracting coefficients of the desired polynomial
 c3 = char_poly.Numerator{1}(1);
 c2 = char_poly.Numerator{1}(2);
@@ -56,9 +56,8 @@ g1 = F(3); g0 = F(4);
 % Define Pole Placement Controller 
 C_2 = (g1*s + g0)/(f1*s + f0)
 % Determine controller gain
-DC_gain = evalfr(C_2,0) ;
+DC_gain = evalfr(C_2,0);
 Kp_c2 = 1/DC_gain;
-% Kp_c2 = 1;
 %% Digital Controller
 C_D2 = c2d(C_2, T, 'tustin');
 a = C_D2.Numerator{1}(1); b =C_D2.Numerator{1}(2); 
@@ -77,8 +76,8 @@ P_aug = G * G_2;
 G_outer = C_2 * P_aug / (1 + C_2 + P_aug);
 
 %% Graphing Results
-sim('Pole_Placement_Continuous'); % continuous model
-sim('Pole_Placement_Digital');
+sim('Pole_Placement_Continuous_a'); % continuous model
+sim('Pole_Placement_Digital_a');
 figure();
 % plot(ball_out); hold on;
 plot(ball_out); hold on;
