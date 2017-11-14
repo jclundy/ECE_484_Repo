@@ -36,8 +36,8 @@ a = C_D2.Numerator{1}(1); b =C_D2.Numerator{1}(2);
 c = C_D2.Denominator{1}(1); d= C_D2.Denominator{1}(2);
 
 %% Graphing Results
-sim('Lead_Filter_Continuous');
-sim('Lead_Filter_Digital');
+sim('Lead_Filter_Continuous_a');
+sim('Lead_Filter_Digital_a');
 figure();
 plot(ball_out); hold on;
 plot(filtered_contol); hold on;
