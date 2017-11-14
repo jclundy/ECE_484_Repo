@@ -27,7 +27,7 @@ p_c2 = 2.5;
 z_c2 = 0.35;
 Kp_c2 = 7;
 %% Outer loop controller
-C_2 = Kp_c2 * (s + z_c2) / (s + p_c2);
+C_2 = (s + z_c2) / (s + p_c2);
 % P_aug = G * G_2;
 % G_outer = C_2 * P_aug / (1 + C_2 + P_aug);
 % digital controller
