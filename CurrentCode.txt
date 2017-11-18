@@ -28,42 +28,50 @@ float angle_rad = (angV - zero_V) * V_to_rad_scale;
 /* Ball Position Mapping */
 float left = 3.3;
 float right = 7.26;
-float V_to_pos_scale = (41.7) / (right - left);
+float V_to_pos_scale = (0.417) / (right - left);
 float pos_cm = (posV - left) * V_to_pos_scale;
 /* SCALING end */
 
 if (Loop  < 3) /* all shift registers cleared after 3rd iteration; this statement initializes the shift registers */
-   {u = e = ThRef = posV= angV =ServoAng= BallPosn= 0;}
+   {ui = ei = ThRef = posV= angV =ServoAng= BallPosn= uo= eo= 0;}
 else
 {
 if (Manual)    /*manual motor voltage control*/
-   {   u = MotV;}
+   {   ui = MotV;}
     else     /*control algorithm*/
    { 
 
 /* CAUTION: DO NOT load the output of a nonlinear block (e.g., saturator, offset) into a SHIFT REGISTER, 
 to avoid introducing a nonlinearity into your controller loop. Create separate variables to hold nonlinear values.*/
 
-/* Place your outer loop BALL POSITION CONTROLLER below */
-// BallPosn = 0; // REMOVE this line when the ball is being used on the beam
-
-/* Place your gear angle SATURATOR below */
-if(ref > 0.785) {
-    ref = 0.785;
-} else if (ref < -0.785) {
-    ref = -0.785;
+/* Ball Position Saturator */
+if(ref > 0.417) {
+    ref = 0.417;
+} else if (ref < 0) {
+    ref = 0;
 }
 
-/* Place your inner loop GEAR ANGLE CONTROLLER below */
-  e = ref - angle_rad;
-  u = 0.9488*u1 + 14.98*e - 14.25*e1; /* Values from Lab2.m */
+/* Ball Position Controller */
+eo = ref - pos_cm;
+uo = 0.9245*uo1 + 56.6023*eo - 56.4825*eo1;  /* Values from Lab3_Pole_Placement.m */
+
+/* Gear Angle Saturator */
+if(uo > 0.785) {
+    uo = 0.785;
+} else if (uo < -0.785) {
+    uo = -0.785;
+}
+
+/* Gear Aangle Controller */
+  ei = uo - angle_rad;
+  ui = 0.9488*ui1 + 14.98*ei - 14.25*ei1; /* Values from Lab2.m */
 
 
-/* Motor power saturator */
-  if(u>6) {
-    u=6;
-  } else if(u<-6) {
-    u=-6;
+/* Motor Power Saturator */
+  if(ui>6) {
+    ui=6;
+  } else if(ui<-6) {
+    ui=-6;
   }
 
    }
