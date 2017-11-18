@@ -14,25 +14,22 @@ The inputs "e1" and "e2"are wired  to the corresponding shift register outputs.
 
 /* Place your sensor SCALING here */
 /* NO scaling is provided for the demo */
-BallPosn = posV ;  /* V to V */
-ServoAng = angV; /* V to V */
-
-/* Our Scaling Algorithm for Lab Station 9 */
-/* Servo Angle Mapping */
-float zero_V = 5.895;
-float upper45_V = 5.339;
-float lower45_V = 6.460;
-float V_to_rad_scale = (0.785 * 2) / (lower45_V - upper45_V);
-float angle_rad = (angV - zero_V) * V_to_rad_scale;
 
 /* Ball Position Mapping */
 float left = 3.3;
 float right = 7.26;
 float V_to_pos_scale = (0.417) / (right - left);
-float pos_cm = (posV - left) * V_to_pos_scale;
+BallPosn = (posV - left) * V_to_pos_scale;  /* V to V */
+
+float zero_V = 5.895;
+float upper45_V = 5.339;
+float lower45_V = 6.460;
+float V_to_rad_scale = (0.785 * 2) / (lower45_V - upper45_V);
+ServoAng = (angV - zero_V) * V_to_rad_scale; /* V to V */
+
 /* SCALING end */
 
-if (Loop  < 3) /* all shift registers cleared after 3rd iteration; this statement initializes the shift registers */
+if (Loop  < 5) /* all shift registers cleared after 3rd iteration; this statement initializes the shift registers */
    {ui = ei = ThRef = posV= angV =ServoAng= BallPosn= uo= eo= 0;}
 else
 {
@@ -52,8 +49,12 @@ if(ref > 0.417) {
 }
 
 /* Ball Position Controller */
-eo = ref - pos_cm;
-uo = 0.9245*uo1 + 56.6023*eo - 56.4825*eo1;  /* Values from Lab3_Pole_Placement.m */
+eo = ref - BallPosn;
+/* Values from Lab3 Lead Filter Controller */
+uo = 0.9876*uo1 + 6.963*eo - 6.95*eo1;
+
+/* Values from Lab3 Pole Placement Controller */
+/*uo = 2.91*uo1 - 2.822*uo2 + 0.9125*uo3 + 2.516*eo - 2.505*eo1 - 2.516*eo2 + 2.505*eo3;*/
 
 /* Gear Angle Saturator */
 if(uo > 0.785) {
@@ -63,7 +64,7 @@ if(uo > 0.785) {
 }
 
 /* Gear Aangle Controller */
-  ei = uo - angle_rad;
+  ei = uo - ServoAng;
   ui = 0.9488*ui1 + 14.98*ei - 14.25*ei1; /* Values from Lab2.m */
 
 
