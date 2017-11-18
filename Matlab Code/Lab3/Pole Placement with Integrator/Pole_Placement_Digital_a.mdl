@@ -1,12 +1,12 @@
 Model {
-  Name			  "Lab3_Model"
+  Name			  "Pole_Placement_Digital_a"
   Version		  9.0
   SavedCharacterEncoding  "windows-1252"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.18"
+    ComputedModelVersion    "1.27"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -45,7 +45,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [762.0, 0.0, 781.0, 830.0]
+      Location		      [-7.0, -7.0, 1550.0, 838.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -69,9 +69,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[913.0, 823.0]
-	ZoomFactor		[1.5]
-	Offset			[32.369999999999351, -49.75999999999982]
+	Extents			[1875.0, 833.0]
+	ZoomFactor		[0.8]
+	Offset			[-529.28333333333217, -274.83999999999929]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -91,11 +91,11 @@ Model {
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
       "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAAB4AP///wAAAAEAAAAAAAAAAPwCA"
       "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
-      "QBjAHQAbwByAAAAAAD/////AAAANAD///8AAAO+AAADfAAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "QBjAHQAbwByAAAAAAD/////AAAANAD///8AAAeAAAADhgAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
       "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
       "////wEAAACR/////wAAAAAAAAAA/////wEAAAEE/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAGV/////wAAAAAAAAAA/"
-      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAANO/////wAAAAAAAAAA/"
-      "////wEAAAOG/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAPG/////wAAAAAAAAAA/"
+      "////wEAAAP+/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
     }
   }
   HideAutomaticNames	  on
@@ -105,9 +105,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "joe"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Nov 09 18:29:23 2017"
-  RTWModifiedTimeStamp	  432152960
-  ModelVersionFormat	  "1.%<AutoIncrement:18>"
+  LastModifiedDate	  "Fri Nov 17 14:43:34 2017"
+  RTWModifiedTimeStamp	  432830483
+  ModelVersionFormat	  "1.%<AutoIncrement:27>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -159,12 +159,12 @@ Model {
     $PropName		    "DataLoggingOverride"
     $ObjectID		    7
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
-    model_		    "Lab3_Model"
+    model_		    "Pole_Placement_Digital_a"
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
-      Cell		      "Lab3_Model"
+      Cell		      "Pole_Placement_Digital_a"
       PropName		      "logAsSpecifiedByModels_"
     }
     Array {
@@ -215,7 +215,7 @@ Model {
 	  DisabledProps		  []
 	  Description		  ""
 	  StartTime		  "0.0"
-	  StopTime		  "25.0"
+	  StopTime		  "60"
 	  AbsTol		  "auto"
 	  FixedStep		  "auto"
 	  InitialStep		  "auto"
@@ -1171,8 +1171,8 @@ Model {
     }
   }
   System {
-    Name		    "Lab3_Model"
-    Location		    [762, 0, 1543, 830]
+    Name		    "Pole_Placement_Digital_a"
+    Location		    [-7, -7, 1543, 831]
     Open		    on
     PortBlocksUseCompactNotation off
     ModelBrowserVisibility  off
@@ -1185,9 +1185,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "150"
+    ZoomFactor		    "80"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "33"
+    SIDHighWatermark	    "34"
     Block {
       BlockType		      Saturate
       Name		      "Angle Saturator"
@@ -1215,8 +1215,8 @@ Model {
       Position		      [425, 192, 535, 268]
       ZOrder		      52
       InputPortMap	      "u0"
-      Numerator		      "[0.009207990349435  -0.008078213457751]"
-      Denominator	      "[1.000000000000000  -0.980383860914024]"
+      Numerator		      "C_D2.Numerator{1}"
+      Denominator	      "C_D2.Denominator{1}"
       SampleTime	      "T"
     }
     Block {
@@ -1402,6 +1402,17 @@ Model {
       LowerLimit	      "0"
     }
     Block {
+      BlockType		      Saturate
+      Name		      "Position Saturator1"
+      SID		      "34"
+      Ports		      [1, 1]
+      Position		      [960, 215, 990, 245]
+      ZOrder		      54
+      InputPortMap	      "u0"
+      UpperLimit	      "0.417"
+      LowerLimit	      "0"
+    }
+    Block {
       BlockType		      Scope
       Name		      "Scope"
       SID		      "5"
@@ -1435,8 +1446,8 @@ Model {
       Position		      [40, 195, 100, 265]
       ZOrder		      47
       WaveForm		      "square"
-      Amplitude		      "0.1"
-      Frequency		      "0.1"
+      Amplitude		      "0.03"
+      Frequency		      "0.05"
     }
     Block {
       BlockType		      Sum
@@ -1485,7 +1496,7 @@ Model {
       Name		      "To Workspace1"
       SID		      "9"
       Ports		      [1]
-      Position		      [660, 125, 720, 155]
+      Position		      [705, 125, 765, 155]
       ZOrder		      30
       VariableName	      "filtered_contol"
       MaxDataPoints	      "inf"
@@ -1499,7 +1510,7 @@ Model {
       Name		      "To Workspace2"
       SID		      "10"
       Ports		      [1]
-      Position		      [620, 50, 680, 80]
+      Position		      [595, 85, 655, 115]
       ZOrder		      31
       VariableName	      "input_sig"
       MaxDataPoints	      "inf"
@@ -1540,7 +1551,7 @@ Model {
       BlockType		      TransferFcn
       Name		      "Transfer Fcn1"
       SID		      "25"
-      Position		      [915, 212, 975, 248]
+      Position		      [865, 212, 925, 248]
       ZOrder		      44
       Numerator		      "[K3]"
       Denominator	      "[1 0 0]"
@@ -1549,17 +1560,16 @@ Model {
       ZOrder		      62
       SrcBlock		      "Discrete\nTransfer Fcn"
       SrcPort		      1
-      Points		      [0, -11; 35, 0]
+      Points		      [35, 0]
       Branch {
-	ZOrder			84
-	Points			[0, 11]
-	DstBlock		"Angle Saturator"
+	ZOrder			106
+	Points			[0, -130]
+	DstBlock		"To Workspace2"
 	DstPort			1
       }
       Branch {
-	ZOrder			48
-	Points			[0, -154]
-	DstBlock		"To Workspace2"
+	ZOrder			84
+	DstBlock		"Angle Saturator"
 	DstPort			1
       }
     }
@@ -1570,6 +1580,7 @@ Model {
       Points		      [15, 0]
       Branch {
 	ZOrder			49
+	Points			[0, -90]
 	DstBlock		"To Workspace1"
 	DstPort			1
       }
@@ -1638,24 +1649,8 @@ Model {
       ZOrder		      38
       SrcBlock		      "Transfer Fcn1"
       SrcPort		      1
-      Points		      [42, 0]
-      Branch {
-	ZOrder			58
-	Points			[0, 146; -737, 0]
-	DstBlock		"Sum"
-	DstPort			2
-      }
-      Branch {
-	ZOrder			44
-	DstBlock		"To Workspace3"
-	DstPort			1
-      }
-      Branch {
-	ZOrder			51
-	Points			[0, -75]
-	DstBlock		"Scope"
-	DstPort			1
-      }
+      DstBlock		      "Position Saturator1"
+      DstPort		      1
     }
     Line {
       ZOrder		      54
@@ -1678,6 +1673,29 @@ Model {
       Points		      [20, 0]
       DstBlock		      "Sum1"
       DstPort		      2
+    }
+    Line {
+      ZOrder		      105
+      SrcBlock		      "Position Saturator1"
+      SrcPort		      1
+      Points		      [27, 0]
+      Branch {
+	ZOrder			58
+	Points			[0, 146; -737, 0]
+	DstBlock		"Sum"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			44
+	DstBlock		"To Workspace3"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			51
+	Points			[0, -75]
+	DstBlock		"Scope"
+	DstPort			1
+      }
     }
   }
 }
