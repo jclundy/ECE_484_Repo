@@ -17,21 +17,22 @@ G_inner = P_inner*C_inner/(1+P_inner*C_inner);
 fb = bandwidth(G_inner) * 0.5 / pi();
 ts_recommended = 1/ (25 * fb);
 % define inner loop digital controller
-C_D = c2d(C_inner,T,'tustin');
+C_D_inner = c2d(C_inner,T,'tustin');
 %% Plant Model
 K2 = 0.062;
 K3 = 4.78;
 P_outer = K2 * K3 / s^2;
 %% Outer loop parameters
 p_c2 = 2.5; 
-z_c2 = 0.35;
-Kp_c2 = 7;
+z_c2 = 0.15;
+Kp_c2 = 0.001;
+z_c2a = 0.001;
 %% Outer loop controller
-C_outer = Kp_c2*(s + z_c2) / (s + p_c2) * 1/s;
+C_outer = Kp_c2*(s + z_c2)*(s+z_c2a) / (s + p_c2) * 1/s;
 P_aug = G_inner * P_outer;
 G_outer = C_outer * P_aug / (1 + C_outer + P_aug);
 % digital controller
-C_D2 = c2d(C_outer,T,'tustin')
+C_D_inner = c2d(C_outer,T,'tustin')
 return
 %% Graphing Results
 sim('Lead_Filter_Integrator_Continuous_a');

@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.26"
+    ComputedModelVersion    "1.28"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -67,7 +67,7 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[1496.0, 657.0]
+	Extents			[1659.0, 753.0]
 	ZoomFactor		[1.0]
 	Offset			[-173.58809523809418, -90.561904761903349]
       }
@@ -82,18 +82,18 @@ Model {
 	UserData		""
 	Floating		[0]
 	DockPosition		"Right"
-	Width			[640]
-	Height			[480]
+	Width			[579]
+	Height			[434]
       }
       WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAAB+PwCAAAAA/sAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
-      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABjAP///wAAAAEAAAAAAAAAAPwCA"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABiAP///wAAAAEAAAAAAAAAAPwCA"
       "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
-      "QBjAHQAbwByAAAAAAD/////AAAAKwD///8AAAX+AAACygAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "QBjAHQAbwByAAAAAAD/////AAAALgD///8AAAanAAADMAAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
       "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
-      "////wEAAAB5/////wAAAAAAAAAA/////wEAAADa/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAFT/////wAAAAAAAAAA/"
-      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAL9/////wAAAAAAAAAA/"
-      "////wEAAAMs/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+      "////wEAAACE/////wAAAAAAAAAA/////wEAAADu/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAFy/////wAAAAAAAAAA/"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAANJ/////wAAAAAAAAAA/"
+      "////wEAAAN8/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
     }
   }
   HideAutomaticNames	  on
@@ -103,9 +103,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "jclundy"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Nov 21 12:46:42 2017"
-  RTWModifiedTimeStamp	  433169200
-  ModelVersionFormat	  "1.%<AutoIncrement:26>"
+  LastModifiedDate	  "Tue Nov 21 14:58:01 2017"
+  RTWModifiedTimeStamp	  433177076
+  ModelVersionFormat	  "1.%<AutoIncrement:28>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1168,7 +1168,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "34"
+    SIDHighWatermark	    "47"
     Block {
       BlockType		      Saturate
       Name		      "Angle Saturator"
@@ -1222,7 +1222,7 @@ Model {
       Variant		      off
       System {
 	Name			"Inner Loop"
-	Location		[-8, -8, 1928, 1048]
+	Location		[8, 8, 1558, 846]
 	Open			off
 	PortBlocksUseCompactNotation off
 	ModelBrowserVisibility	off
@@ -1235,7 +1235,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"250"
+	ZoomFactor		"100"
 	Block {
 	  BlockType		  Inport
 	  Name			  "In1"
@@ -1245,15 +1245,13 @@ Model {
 	  IconDisplay		  "Port number"
 	}
 	Block {
-	  BlockType		  Gain
-	  Name			  "Gain"
-	  SID			  "1"
-	  Position		  [140, 25, 170, 55]
-	  ZOrder		  28
-	  Gain			  "Kp"
-	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SaturateOnIntegerOverflow off
+	  BlockType		  DiscreteTransferFcn
+	  Name			  "Discrete\nTransfer Fcn"
+	  SID			  "35"
+	  Ports			  [1, 1]
+	  Position		  [240, 92, 300, 128]
+	  ZOrder		  38
+	  InputPortMap		  "u0"
 	}
 	Block {
 	  BlockType		  TransferFcn
@@ -1261,8 +1259,8 @@ Model {
 	  SID			  "2"
 	  Position		  [355, 22, 415, 58]
 	  ZOrder		  27
-	  Numerator		  "[K1]"
-	  Denominator		  "[tau 1 0]"
+	  Numerator		  "P_inner.Numerator{1}"
+	  Denominator		  "P_inner.Denominator{1}"
 	}
 	Block {
 	  BlockType		  Saturate
@@ -1295,8 +1293,8 @@ Model {
 	  SID			  "11"
 	  Position		  [200, 22, 260, 58]
 	  ZOrder		  32
-	  Numerator		  "[1 z]"
-	  Denominator		  "[1 p]"
+	  Numerator		  "C_D_inner.Numerator{1}"
+	  Denominator		  "C_D_inner.Denominator{1}"
 	}
 	Block {
 	  BlockType		  Outport
@@ -1331,8 +1329,8 @@ Model {
 	  }
 	}
 	Line {
-	  ZOrder		  2
-	  SrcBlock		  "Gain"
+	  ZOrder		  24
+	  SrcBlock		  "Sum"
 	  SrcPort		  1
 	  DstBlock		  "Transfer Fcn1"
 	  DstPort		  1
@@ -1342,13 +1340,6 @@ Model {
 	  SrcBlock		  "Transfer Fcn1"
 	  SrcPort		  1
 	  DstBlock		  "Saturation1"
-	  DstPort		  1
-	}
-	Line {
-	  ZOrder		  1
-	  SrcBlock		  "Sum"
-	  SrcPort		  1
-	  DstBlock		  "Gain"
 	  DstPort		  1
 	}
 	Line {
