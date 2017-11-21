@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.15"
+    ComputedModelVersion    "1.17"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -69,8 +69,8 @@ Model {
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [1496.0, 654.0]
-	  ZoomFactor		  [0.8]
-	  Offset		  [-156.46666666666681, -114.08333333333348]
+	  ZoomFactor		  [0.6]
+	  Offset		  [-267.16666666666686, -280.26666666666682]
 	}
 	Object {
 	  $ObjectID		  6
@@ -115,9 +115,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "jclundy"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Nov 21 12:37:25 2017"
-  RTWModifiedTimeStamp	  433168644
-  ModelVersionFormat	  "1.%<AutoIncrement:15>"
+  LastModifiedDate	  "Tue Nov 21 12:40:59 2017"
+  RTWModifiedTimeStamp	  433168856
+  ModelVersionFormat	  "1.%<AutoIncrement:17>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1012,6 +1012,24 @@ Model {
       Interpolate	      on
     }
     Block {
+      BlockType		      Integrator
+      ExternalReset	      "none"
+      InitialConditionSource  "internal"
+      InitialCondition	      "0"
+      LimitOutput	      off
+      UpperSaturationLimit    "inf"
+      LowerSaturationLimit    "-inf"
+      WrapState		      off
+      WrappedStateUpperValue  "pi"
+      WrappedStateLowerValue  "-pi"
+      ShowSaturationPort      off
+      ShowStatePort	      off
+      AbsoluteTolerance	      "auto"
+      IgnoreLimit	      off
+      ZeroCross		      on
+      ContinuousStateAttributes	"''"
+    }
+    Block {
       BlockType		      Outport
       Port		      "1"
       OutMin		      "[]"
@@ -1143,15 +1161,15 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "80"
+    ZoomFactor		    "60"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "31"
+    SIDHighWatermark	    "33"
     Block {
       BlockType		      Saturate
       Name		      "Angle Saturator"
       SID		      "3"
       Ports		      [1, 1]
-      Position		      [580, 210, 610, 240]
+      Position		      [580, 215, 610, 245]
       ZOrder		      29
       InputPortMap	      "u0"
       UpperLimit	      "0.785"
@@ -1169,7 +1187,7 @@ Model {
       BlockType		      Gain
       Name		      "Gain1"
       SID		      "13"
-      Position		      [340, 215, 395, 245]
+      Position		      [230, 215, 285, 245]
       ZOrder		      37
       Gain		      "Kp_c2"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
@@ -1337,11 +1355,19 @@ Model {
       }
     }
     Block {
+      BlockType		      Integrator
+      Name		      "Integrator"
+      SID		      "33"
+      Ports		      [1, 1]
+      Position		      [440, 215, 470, 245]
+      ZOrder		      56
+    }
+    Block {
       BlockType		      Saturate
       Name		      "Position Saturator"
       SID		      "22"
       Ports		      [1, 1]
-      Position		      [180, 215, 210, 245]
+      Position		      [80, 215, 110, 245]
       ZOrder		      41
       InputPortMap	      "u0"
       UpperLimit	      "0.417"
@@ -1389,7 +1415,7 @@ Model {
       Name		      "Sum"
       SID		      "21"
       Ports		      [2, 1]
-      Position		      [275, 220, 295, 240]
+      Position		      [165, 220, 185, 240]
       ZOrder		      40
       ShowName		      off
       IconShape		      "round"
@@ -1445,7 +1471,7 @@ Model {
       Name		      "To Workspace2"
       SID		      "10"
       Ports		      [1]
-      Position		      [565, 125, 625, 155]
+      Position		      [690, 35, 750, 65]
       ZOrder		      31
       VariableName	      "input_sig_cont"
       MaxDataPoints	      "inf"
@@ -1481,34 +1507,16 @@ Model {
       BlockType		      TransferFcn
       Name		      "Transfer Fcn2"
       SID		      "12"
-      Position		      [440, 207, 510, 253]
+      Position		      [325, 207, 395, 253]
       ZOrder		      36
       Numerator		      "[1 z_c2]"
       Denominator	      "[1 p_c2]"
     }
     Line {
-      ZOrder		      15
-      SrcBlock		      "Transfer Fcn2"
-      SrcPort		      1
-      Points		      [22, 0]
-      Branch {
-	ZOrder			48
-	Points			[14, 0; 0, -5]
-	DstBlock		"Angle Saturator"
-	DstPort			1
-      }
-      Branch {
-	ZOrder			4
-	Points			[0, -90]
-	DstBlock		"To Workspace2"
-	DstPort			1
-      }
-    }
-    Line {
       ZOrder		      14
       SrcBlock		      "Angle Saturator"
       SrcPort		      1
-      Points		      [30, 0]
+      Points		      [30, 0; 0, -5]
       Branch {
 	ZOrder			30
 	DstBlock		"Inner Loop"
@@ -1579,7 +1587,7 @@ Model {
       Points		      [67, 0]
       Branch {
 	ZOrder			45
-	Points			[0, 151; -737, 0]
+	Points			[0, 151; -847, 0]
 	DstBlock		"Sum"
 	DstPort			2
       }
@@ -1609,6 +1617,30 @@ Model {
       SrcPort		      1
       DstBlock		      "Sum1"
       DstPort		      1
+    }
+    Line {
+      ZOrder		      76
+      SrcBlock		      "Transfer Fcn2"
+      SrcPort		      1
+      DstBlock		      "Integrator"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      78
+      SrcBlock		      "Integrator"
+      SrcPort		      1
+      Points		      [40, 0]
+      Branch {
+	ZOrder			80
+	Points			[0, -180]
+	DstBlock		"To Workspace2"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			79
+	DstBlock		"Angle Saturator"
+	DstPort			1
+      }
     }
   }
 }
