@@ -7,13 +7,15 @@
 float Temp1; 
 float eGearAng;
 
+float gearAngSat;
+float motorPowSat; /* Make this shift register, replace ui, make new ui */
+
 /*  Shift registers permit previous values of variables to be saved. 
 The output variable "e" is wired to a shift register input on the For Loop border.  
 The inputs "e1" and "e2"are wired  to the corresponding shift register outputs.
  "e1" holds the value of "e" from the previous iteration and "e2" holds the value of "e1" from  the previous iteration. */
 
 /* Place your sensor SCALING here */
-/* NO scaling is provided for the demo */
 
 /* Ball Position Mapping */
 float left = 3.3;
@@ -21,6 +23,7 @@ float right = 7.26;
 float V_to_pos_scale = (0.417) / (right - left);
 BallPosn = (posV - left) * V_to_pos_scale;  /* V to V */
 
+/* Gear Angle Mapping */
 float zero_V = 5.895;
 float upper45_V = 5.339;
 float lower45_V = 6.460;
@@ -51,20 +54,21 @@ if(ref > 0.417) {
 /* Ball Position Controller */
 eo = ref - BallPosn;
 /* Values from Lab3 Lead Filter Controller */
-uo = 0.9876*uo1 + 6.963*eo - 6.95*eo1;
+/* uo = 0.9876*uo1 + 6.963*eo - 6.95*eo1; */
 
 /* Values from Lab3 Pole Placement Controller */
-/*uo = 2.91*uo1 - 2.822*uo2 + 0.9125*uo3 + 2.516*eo - 2.505*eo1 - 2.516*eo2 + 2.505*eo3;*/
+uo = 2.91*uo1 - 2.822*uo2 + 0.9125*uo3 + 2.516*eo - 2.505*eo1 - 2.516*eo2 + 2.505*eo3;
+ThRef = gearAngSat = uo;
 
 /* Gear Angle Saturator */
-if(uo > 0.785) {
-    uo = 0.785;
-} else if (uo < -0.785) {
-    uo = -0.785;
+if(gearAngSat  > 0.785) {
+    gearAngSat  = 0.785;
+} else if (gearAngSat  < -0.785) {
+    gearAngSat  = -0.785;
 }
 
 /* Gear Aangle Controller */
-  ei = uo - ServoAng;
+  ei = gearAngSat - ServoAng;
   ui = 0.9488*ui1 + 14.98*ei - 14.25*ei1; /* Values from Lab2.m */
 
 
