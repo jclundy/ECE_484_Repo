@@ -8,7 +8,9 @@ float Temp1;
 float eGearAng;
 
 float gearAngSat;
-float motorPowSat; /* Make this shift register, replace ui, make new ui */
+
+float e_abs;
+float diff_stiction;
 
 /*  Shift registers permit previous values of variables to be saved. 
 The output variable "e" is wired to a shift register input on the For Loop border.  
@@ -33,7 +35,8 @@ ServoAng = (angV - zero_V) * V_to_rad_scale; /* V to V */
 /* SCALING end */
 
 if (Loop  < 5) /* all shift registers cleared after 3rd iteration; this statement initializes the shift registers */
-   {ui = ei = ThRef = posV= angV =ServoAng= BallPosn= uo= eo= 0;}
+   {ui = ei = ThRef = posV= angV =ServoAng= BallPosn= uo= eo= motorOutput= eStiction= 0;
+     diff_stiction = 1;}
 else
 {
 if (Manual)    /*manual motor voltage control*/
@@ -57,8 +60,24 @@ eo = ref - BallPosn;
 /* uo = 0.9876*uo1 + 6.963*eo - 6.95*eo1; */
 
 /* Values from Lab3 Pole Placement Controller */
-uo = 2.91*uo1 - 2.822*uo2 + 0.9125*uo3 + 2.516*eo - 2.505*eo1 - 2.516*eo2 + 2.505*eo3;
+uo =  9.947828571*eo - 19.87577143*eo1 + 9.927952795*eo2 + 1.98757764*uo1 - 0.9875776398*uo2;
 ThRef = gearAngSat = uo;
+
+e_abs = eo;
+if(e_abs < 0) {e_abs = -1*e_abs;}
+if(Loop % 10 == 0) {
+    eStiction = e_abs;
+    diff_stiction = eStiction - eStiction1;
+}
+if(e_abs < 0.05 && e_abs > 0.005 && diff_stiction < 0.01){
+        /*if(eo > 0){
+            gearAngSat = gearAngSat + 0.2;
+        }
+        if(eo < 0){
+            gearAngSat = gearAngSat - 0.2;
+        }*/
+        gearAngSat = gearAngSat + eo*4;
+    }
 
 /* Gear Angle Saturator */
 if(gearAngSat  > 0.785) {
@@ -70,13 +89,14 @@ if(gearAngSat  > 0.785) {
 /* Gear Aangle Controller */
   ei = gearAngSat - ServoAng;
   ui = 0.9488*ui1 + 14.98*ei - 14.25*ei1; /* Values from Lab2.m */
+  motorOutput = ui;
 
 
 /* Motor Power Saturator */
-  if(ui>6) {
-    ui=6;
-  } else if(ui<-6) {
-    ui=-6;
+  if(motorOutput>6) {
+    motorOutput=6;
+  } else if(motorOutput<-6) {
+    motorOutput=-6;
   }
 
    }
@@ -84,4 +104,3 @@ if(gearAngSat  > 0.785) {
     
 /* ThRef, ThRef1, e, e1 are present, but not used in this demo.  
 However, they will be necessary (at a minimum) when the controllers will be implemented. */
-
